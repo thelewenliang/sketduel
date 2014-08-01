@@ -17,6 +17,7 @@ public class Sketduel {
      */
     public static void main(String[] args) {
         System.out.println("shit");
+        System.out.println("");
     }
     
 }
