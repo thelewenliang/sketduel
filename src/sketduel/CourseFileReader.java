@@ -25,13 +25,13 @@ public class CourseFileReader {
             boolean end = false;
             while (!end) {
                 String in = reader.readLine();
-                if ("</course>".equals(in)) {
+                if ("</course>".equals(in)) { 
                     end = true;
                     continue;
                 }
                 String[] info = in.split(" ");
                 int secCode = Integer.parseInt(info[0]);
-                Period period = new Period(info[1], info[2] + ":" + info[3]);
+                Period period = new Period(info[1], info[2] + "-" + info[3]);
                 String room = info[4];
                 Section section = new Section(course, secCode, period, room);
                 course.sectionList.add(section);
