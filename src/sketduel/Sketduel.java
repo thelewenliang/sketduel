@@ -6,12 +6,14 @@
 
 package sketduel;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.IOException;
+import java.awt.Dimension;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import javax.swing.JFrame;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
 
 /**
  *
@@ -19,24 +21,42 @@ import java.util.logging.Logger;
  */
 public class Sketduel {
 
-    /**
-     * @param args the command line arguments
-     */
+    ArrayList<Course> courseList;
+    
     public static void main(String[] args) {
-        try {
-            CourseFileReader reader = new CourseFileReader(new File("testcourse.txt"));
-            ArrayList<Course> courseList = reader.readCourses();
-            for(Course x : courseList) {
-                System.out.println(x);
-                for(Section y : x.sectionList) {
-                    System.out.println(y);
-                }
-            }
-        } catch (FileNotFoundException ex) {
-            ex.printStackTrace();
-        } catch (IOException ex) {
-            ex.printStackTrace();
-        }
+        new Sketduel().go();
     }
     
+    public void go() {
+        setupWindow();
+    }
+    
+    public void setupWindow() {
+        System.setProperty("apple.laf.useScreenMenuBar", "true");
+        JFrame frame = new JFrame("Sketduel");
+        JMenuBar menuBar = new JMenuBar();
+        JMenu fileMenu = new JMenu("File");
+        JMenuItem loadCoursesItem = new JMenuItem("Load Courses");
+        fileMenu.add(loadCoursesItem);
+        menuBar.add(fileMenu);
+        frame.setJMenuBar(menuBar);
+        frame.setSize(new Dimension(500,300));
+        frame.setLocationRelativeTo(null);
+        frame.setVisible(true);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.requestFocus();
+    }
+    
+    public void showLoadCourses() {
+        new CourseFileWriter()
+    }
+    
+    public class LoadCoursesItemListener implements ActionListener {
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            showLoadCourses();
+        }
+        
+    }
 }
